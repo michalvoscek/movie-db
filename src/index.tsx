@@ -6,9 +6,12 @@ import {store} from './app/store'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import './index.css'
+import {saveState} from './app/browserStorage'
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
+
+store.subscribe(() => {saveState(store.getState())})
 
 root.render(
   <React.StrictMode>
