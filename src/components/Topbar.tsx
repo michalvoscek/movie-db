@@ -1,3 +1,5 @@
+import {useState} from 'react'
+import {useNavigate} from 'react-router-dom'
 import { styled, alpha } from '@mui/material/styles'
 import AppBar from '@mui/material/AppBar'
 import Box from '@mui/material/Box'
@@ -5,8 +7,6 @@ import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import InputBase from '@mui/material/InputBase'
 import SearchIcon from '@mui/icons-material/Search'
-import {useAppSelector, useAppDispatch} from '../app/hooks'
-import {setQuery, selectSearchQuery} from '../features/search/searchSlice'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -51,10 +51,18 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }))
 
 export const Topbar = () => {
-  const searchQuery: string = useAppSelector(selectSearchQuery)
-  const dispatch = useAppDispatch()
+  const [query, setQuery] = useState<string>('')
+  const navigate = useNavigate()
   const onSearchChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    dispatch(setQuery(event.target.value))
+    setQuery(event.target.value)
+  }
+  const onSearchKeyPress = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (event.key === "Enter") {
+      event.preventDefault()
+      const params: URLSearchParams = new URLSearchParams()
+      params.append('s', query)
+      navigate(`/search?${params.toString()}`)
+    }
   }
 
   return (
@@ -68,7 +76,7 @@ export const Topbar = () => {
             href="/"
             sx={{
               mr: 2,
-              display: { xs: 'none', md: 'flex', flexGrow: 1 },
+              display: {xs: 'flex', flexGrow: 1},
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.3rem',
@@ -84,9 +92,9 @@ export const Topbar = () => {
             </SearchIconWrapper>
             <StyledInputBase
               placeholder="Search…"
-              inputProps={{ 'aria-label': 'search' }}
+              inputProps={{'aria-label': 'search', onKeyPress: onSearchKeyPress}}
               onChange={onSearchChange}
-              value={searchQuery}
+              value={query}
             />
           </Search>
         </Toolbar>
