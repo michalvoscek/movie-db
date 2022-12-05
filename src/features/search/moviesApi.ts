@@ -18,7 +18,15 @@ export const moviesApi = createApi({
         return `?${params.toString()}`
       },
     }),
+    getDetail: builder.query({
+      query: (query: string) => {
+        const params: URLSearchParams = new URLSearchParams()
+        params.append('apiKey', apiKey)
+        params.append('i', query)
+        return `?${params.toString()}`
+      },
+    }),
   }),
 })
 
-export const {useGetSearchQuery} = moviesApi
+export const {useGetSearchQuery, useGetDetailQuery} = moviesApi
