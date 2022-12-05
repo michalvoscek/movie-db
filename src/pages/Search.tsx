@@ -1,5 +1,5 @@
 import {useGetSearchQuery} from '../features/search/moviesApi'
-import {useSearchParams} from 'react-router-dom'
+import {useSearchParams, useNavigate} from 'react-router-dom'
 
 import List from '@mui/material/List'
 import ListItem from '@mui/material/ListItem'
@@ -15,6 +15,7 @@ import Stack from '@mui/material/Stack'
 
 export const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams()
+  const navigate = useNavigate()
   const searchQuery: string = searchParams.get('s')!
   const pageQuery: string | null = searchParams.get('p')
   const page: number = Number(pageQuery) || 1
@@ -23,6 +24,9 @@ export const Search = () => {
     searchParams.set('p', newPage.toString())
     setSearchParams(searchParams)
   }
+  const onItemClick = (imdbID: string) => () => {
+    navigate(`/detail/${imdbID}`)
+  } 
   if (res.isLoading) return <Typography>Loading...</Typography>
   if (res.data.Response === 'False') return <Typography>{res.data.Error}</Typography>
   console.log('res', res)
@@ -32,9 +36,9 @@ export const Search = () => {
       <List sx={{width: '100%', maxWidth: 720, bgcolor: 'background.paper'}}>
       {res.data.Search.map((movie: any, index: number) => {
         return (<>
-          {index !== 0 && <Divider component="li" />}
-          <ListItem alignItems="flex-start" disablePadding>
-            <ListItemButton>
+          {index !== 0 && <Divider key={`${movie.imdbID}_divider`} component="li" />}
+          <ListItem key={movie.imdbID} alignItems="flex-start" disablePadding>
+            <ListItemButton onClick={onItemClick(movie.imdbID)}>
               <ListItemAvatar>
                 <Avatar alt="Remy Sharp" src={movie.Poster} />
               </ListItemAvatar>
