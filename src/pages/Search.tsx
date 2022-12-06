@@ -64,7 +64,7 @@ export const Search = () => {
       })}
       </List>
       <Stack spacing={2}>
-        <Pagination onChange={onPageChange} count={Math.ceil(res.data.totalResults / 10)} />
+        <Pagination page={page} onChange={onPageChange} count={Math.ceil(res.data.totalResults / 10)} />
       </Stack>
     </Container>
   )
