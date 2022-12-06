@@ -25,6 +25,6 @@ export const favouritesSlice = createSlice({
 
 export const {add, remove} = favouritesSlice.actions;
 
-export const selectCount = (state: RootState) => state.favourites.value;
+export const selectFavourites = (state: RootState) => state.favourites.value;
 
 export default favouritesSlice.reducer
