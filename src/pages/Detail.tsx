@@ -3,6 +3,9 @@ import {useGetDetailQuery} from '../features/search/moviesApi'
 import Typography from '@mui/material/Typography'
 import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
+import IconButton from '@mui/material/IconButton'
+import RemoveIcon from '@mui/icons-material/Remove'
+import StarIcon from '@mui/icons-material/Star'
 import {useAppSelector, useAppDispatch} from '../app/hooks'
 import {add, remove, selectFavourites} from '../features/favourites/favouritesSlice'
 import {Movie} from "../types"
@@ -28,9 +31,13 @@ export const Detail = () => {
         <Grid item xs={6}><Typography variant="h6">{data.Title}</Typography></Grid>
         <Grid item xs={6}>{
           isFavourited ?
-            <div onClick={() => dispatch(remove(id!))}>-</div>
+            <IconButton aria-label="delete" onClick={() => dispatch(remove(id!))}>
+              <RemoveIcon />
+            </IconButton>
             :
-            <div onClick={() => dispatch(add(thisMovie))}>*</div>
+            <IconButton aria-label="add" onClick={() => dispatch(add(thisMovie))}>
+              <StarIcon />
+            </IconButton>
         }</Grid>
         <Grid item xs={12}>
           <img
