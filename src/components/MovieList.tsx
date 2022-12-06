@@ -29,9 +29,9 @@ export const MovieList = ({list, count}: {list: Movie[], count: number}) => {
     <>
       <List sx={{width: '100%', maxWidth: 720, bgcolor: 'background.paper'}}>
       {list.map((movie: Movie, index: number) => {
-        return (<>
-          {index !== 0 && <Divider key={`${movie.imdbID}_divider`} component="li" />}
-          <ListItem key={movie.imdbID} alignItems="flex-start" disablePadding>
+        return (<div key={movie.imdbID}>
+          {index !== 0 && <Divider component="li" />}
+          <ListItem alignItems="flex-start" disablePadding>
             <ListItemButton onClick={onItemClick(movie.imdbID)}>
               <ListItemAvatar>
                 <Avatar alt="Remy Sharp" src={movie.Poster} />
@@ -54,7 +54,7 @@ export const MovieList = ({list, count}: {list: Movie[], count: number}) => {
               />
             </ListItemButton>
           </ListItem>
-        </>)
+        </div>)
       })}
       </List>
       <Stack spacing={2}>
