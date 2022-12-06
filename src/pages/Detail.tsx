@@ -8,7 +8,7 @@ import {add, remove, selectFavourites} from '../features/favourites/favouritesSl
 import {Movie} from "../types"
 
 export const Detail = () => {
-  const favourites = useAppSelector(selectFavourites)
+  const favourites: Movie[] = useAppSelector(selectFavourites)
   const dispatch = useAppDispatch()
   const {id} = useParams()
   const res = useGetDetailQuery(id!)
