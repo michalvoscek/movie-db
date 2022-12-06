@@ -22,8 +22,6 @@ export const Detail = () => {
     Type: data.Type,
     Poster: data.Poster,
   }
-  console.log('favourites', favourites)
-  console.log('isFav', isFavourited)
   return (
     <Container maxWidth="sm">
       <Grid container spacing={1}>
@@ -32,7 +30,7 @@ export const Detail = () => {
           isFavourited ?
             <div onClick={() => dispatch(remove(id!))}>-</div>
             :
-            <div onClick={() => {console.log('som tu');dispatch(add(thisMovie))}}>*</div>
+            <div onClick={() => dispatch(add(thisMovie))}>*</div>
         }</Grid>
         <Grid item xs={12}>
           <img
