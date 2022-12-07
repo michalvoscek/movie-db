@@ -58,21 +58,26 @@ export const Topbar = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-        <Link
-          to="/"
-          style={{
-            display:'flex',
-            fontSize: 24,
-            flexGrow: 1,
-            fontFamily: 'monospace',
-            fontWeight: 700,
-            letterSpacing: '.3rem',
-            color: 'inherit',
-            textDecoration: 'none',
-          }}
-        >
-          MDb
-        </Link>
+          <Link
+            to="/"
+            style={{
+              display:'flex',
+              fontSize: 24,
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            MDb
+          </Link>
+          <div
+            style={{
+              display:'flex',
+              flexGrow: 1,
+            }}
+          />
           <Search>
             <StyledInputBase
               placeholder="Search…"
