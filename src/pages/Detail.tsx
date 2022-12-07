@@ -16,6 +16,7 @@ export const Detail = () => {
   const {id} = useParams()
   const res = useGetDetailQuery(id!)
   if (res.isLoading) return <Typography>Loading...</Typography>
+  if (res.data.Response === 'False') return <Typography>{res.data.Error}</Typography>
   const isFavourited = favourites.some((fav: Movie) => fav.imdbID === id)
   const {data} = res
   const thisMovie: Movie = {
@@ -51,6 +52,9 @@ export const Detail = () => {
         </Grid>
         <Grid item xs={12}>
           <Typography>{data.Genre}</Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Typography>{data.Plot}</Typography>
         </Grid>
       </Grid>
     </Container>
