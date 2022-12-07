@@ -1,5 +1,6 @@
 import './App.css';
 import { Routes, Route, Outlet, Link } from 'react-router-dom'
+import Container from '@mui/material/Container'
 import {Home} from './pages/Home'
 import {Search} from './pages/Search'
 import {Detail} from './pages/Detail'
@@ -28,7 +29,9 @@ function Layout() {
   return (
     <div>
       <Topbar />
-      <Outlet />
+      <Container maxWidth="sm">
+        <Outlet />
+      </Container>
     </div>
   );
 }
