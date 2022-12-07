@@ -27,9 +27,9 @@ export const Detail = () => {
   }
   return (
     <>
-      <Grid container spacing={1}>
-        <Grid item xs={6}><Typography variant="h6">{data.Title}</Typography></Grid>
-        <Grid item xs={6}>{
+      <Grid container spacing={1} style={{marginTop: '0.5em'}}>
+        <Grid item xs={10}><Typography variant="h5">{data.Title}</Typography></Grid>
+        <Grid item xs={2}>{
           isFavourited ?
             <IconButton aria-label="delete" onClick={() => dispatch(remove(id!))}>
               <RemoveIcon />

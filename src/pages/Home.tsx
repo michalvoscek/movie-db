@@ -13,8 +13,12 @@ export const Home = () => {
   const pageList: Movie[] = favourites.slice((page - 1) * 10,(page - 1) * 10 + 10)
   return (
     <>
-      <Typography variant="h6">Favourites</Typography>
-      <MovieList list={pageList} count={Math.ceil(favourites.length / 10)} />
+      <Typography variant="h6">Favourites:</Typography>
+      {favourites.length === 0 ?
+        <Typography variant="h6">No favourite movies</Typography>
+        :
+        <MovieList list={pageList} count={Math.ceil(favourites.length / 10)} />
+      }
     </>
   )
 }
